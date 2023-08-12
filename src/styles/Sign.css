@@ -1,0 +1,80 @@
+.Home-container {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-self: center;
+  background-color: rgb(197, 197, 197);
+  width: 17vw;
+  height: fit-content;
+  padding: 3rem;
+  border-radius: 1rem;
+}
+
+.Home-Form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Home-Input {
+  box-sizing: border-box;
+  background-color: #4d7c8a;
+  border: none;
+  width: 100%;
+  height: 2.5rem;
+  margin-bottom: 1rem;
+  padding: 0.3rem;
+  border-radius: 0.3rem;
+  color: #ffffffe7;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.Home-Input:focus {
+  outline: none;
+}
+
+.Home-Input::placeholder {
+  color:rgb(197, 197, 197);
+}
+
+.Home-SubmitButton {
+  background-color: #4d7c8a;
+  border: none;
+  width: 100%;
+  height: 2.5rem;
+  margin-top: 1rem;
+  border-radius: 0.3rem;
+  padding: 0;
+  color: #ffffffe7;
+  transition: background-color 0.2s ease ;
+}
+
+.Home-SubmitButton:hover {
+  background-color: #4d7c8ad5;
+  cursor: pointer;
+}
+
+.Home-Button {
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  border-radius: 0.3rem;
+  padding-top: 1rem;
+  color: #292929;
+  transition: color 0.2s ease ;
+}
+
+.Home-Button:hover {
+  color: #4d7c8a  ;
+  cursor: pointer;
+}
+
+.Home-Label{
+  font-size: 0.8rem;
+  color: #bb0404;
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+}
