@@ -57,7 +57,7 @@ function Sign() {
 
       console.log(res.data);
 
-      navigate(`/creator/${res.data[0].id_creator}`);
+      navigate(`/homepage`);
     } catch (e) {
       setErrorMessage(e.response.data.message);
     }
@@ -68,7 +68,7 @@ function Sign() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/creators/login",
+        "http://localhost:5000/api/creators/signin",
         {
           email: emailValue,
           password: passwordValue,
@@ -78,6 +78,8 @@ function Sign() {
           withCredentials: true,
         }
       );
+
+      navigate(`/homepage`);
     } catch (e) {
       setErrorMessage(e.response.data.message);
     }
