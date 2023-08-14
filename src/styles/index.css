@@ -5,7 +5,6 @@ body {
   width: 100vw;
   margin: 0;
   padding: 0;
-  display: grid;
   color: #292929;
 }
 
@@ -15,6 +14,7 @@ body {
   width: 100vw;
   margin: 0;
   padding: 0;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   color: #292929;
 }

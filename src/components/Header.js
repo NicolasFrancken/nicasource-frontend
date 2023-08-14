@@ -2,17 +2,29 @@ import "../styles/Header.css";
 
 import { IoIosPerson } from "react-icons/io";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
-  const [isActive, setIsActive] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   return (
     <header className="Header-Container">
-      <h1 className="Header-Title">NicaVideo</h1>
-      <button className="Header-LogoutButton">
-        <IoIosPerson />
+      <h1
+        className="Header-Title"
+        onClick={() => {
+          navigate("/videos");
+        }}
+      >
+        NicaVideo
+      </h1>
+      <button
+        variant="outlined"
+        className="Header-Button"
+        onClick={() => {
+          navigate("/profile/1");
+        }}
+      >
+        <IoIosPerson className="Header-Icon" />
       </button>
     </header>
   );

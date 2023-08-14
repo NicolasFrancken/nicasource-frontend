@@ -1,8 +1,8 @@
 import axios from "axios";
 
-async function getVideos() {
+async function getCreatorVideos() {
   try {
-    const res = await axios.get("http://localhost:5000/api/videos", {
+    const res = await axios.get(`http://localhost:5000/api/videos/creator/1`, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     });
@@ -12,4 +12,4 @@ async function getVideos() {
   }
 }
 
-export default getVideos;
+export default getCreatorVideos;

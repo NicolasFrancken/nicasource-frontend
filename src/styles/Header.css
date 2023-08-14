@@ -1,5 +1,42 @@
 .Header-Container{
+  box-sizing: border-box;
   display: flex;
   background-color: rgb(197, 197, 197);
   justify-content: space-between;
+  align-items: center;
+  height: 5rem;
+  padding: 1rem 2rem;
+  /* position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; */
+}
+
+.Header-Title {
+  margin: 0;
+}
+
+.Header-Title:hover{
+  cursor: pointer;
+}
+
+.Header-Button{
+  box-sizing: border-box;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  background-color: transparent;
+  border: 2px solid #292929;
+  border-radius: 1rem;
+  transition: opacity 0.2s ease;
+}
+
+.Header-Button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.Header-Icon {
+  width: 1.5rem;
+  height: 1.5rem;
 }
