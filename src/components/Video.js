@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import getVideo from "../libs/getVideo";
 import updateVideo from "../libs/updateVideo";
+import Header from "./Header";
+import deleteVideo from "../libs/deleteVideo";
 
 function Video() {
   const [errorMessage, setErrorMessage] = useState("");
   const [titleValue, setTitleValue] = useState("");
   const [urlValue, setUrlValue] = useState("");
 
+  const navigate = useNavigate();
   const { videoId } = useParams();
 
   const fetch = async () => {
@@ -16,6 +20,7 @@ function Video() {
 
     if (res.message) {
       setErrorMessage(res.message);
+      return;
     }
 
     setTitleValue(res.video.title);
@@ -41,6 +46,18 @@ function Video() {
 
     if (res.message) {
       setErrorMessage(res.message);
+      return;
+    }
+
+    navigate("/profile/1");
+  };
+
+  const handleDeleteClick = async (id) => {
+    const res = await deleteVideo(id);
+
+    if (res.message) {
+      setErrorMessage(res.message);
+      return;
     }
 
     fetch();
@@ -48,6 +65,8 @@ function Video() {
 
   return (
     <>
+      <Header />
+      <button onClick={handleDeleteClick}>Delete</button>
       <iframe
         width="560"
         height="315"

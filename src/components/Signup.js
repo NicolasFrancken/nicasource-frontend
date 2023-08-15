@@ -49,33 +49,33 @@ function Signup() {
   };
 
   return (
-    <div className="Home-container">
-      <form onSubmit={handleSignupSubmit} className="Home-Form">
+    <div className="Sign-container">
+      <form onSubmit={handleSignupSubmit} className="Sign-Form">
         <input
           value={nameValue}
           onChange={handleNameChange}
           placeholder="Name"
-          className="Home-Input"
+          className="Sign-Input"
         />
         <input
           value={emailValue}
           onChange={handleEmailChange}
           placeholder="Email"
-          className="Home-Input"
+          className="Sign-Input"
         />
         <input
           value={passwordValue}
           type="password"
           onChange={handlePasswordChange}
           placeholder="Password"
-          className="Home-Input"
+          className="Sign-Input"
         />
         {errorMessage !== "" ? (
-          <label className="Home-Label">{errorMessage}</label>
+          <label className="Sign-Label">{errorMessage}</label>
         ) : (
           ""
         )}
-        <button type="submit" className="Home-SubmitButton">
+        <button type="submit" className="Sign-SubmitButton">
           Sign up
         </button>
       </form>
@@ -83,7 +83,7 @@ function Signup() {
         onClick={() => {
           navigate("/signin");
         }}
-        className="Home-Button"
+        className="Sign-Button"
       >
         Already have an account? Sign in
       </button>

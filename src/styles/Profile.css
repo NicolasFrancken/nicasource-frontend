@@ -1,0 +1,66 @@
+.Profile-Container {
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  padding: 7rem 1rem 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.Profile-Top{
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.Profile-Bottom {
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.Profile-Title{
+  margin: 0;
+  align-self: center;
+  justify-self: center;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.Profile-SignoutButton{
+  box-sizing: border-box;
+  align-self: flex-end;
+  justify-self: center;
+  border-radius: 0.7rem;
+  border: 2px solid #292929;
+  background-color: #dfdfdf;
+  color: #292929;
+  width: 7rem;
+  height: 2.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  transition: opacity 0.2s ease;
+}
+
+.Profile-VideoContainer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 300px;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem
+}
+
+.Profile-FrameContainer {
+  border-radius: 1rem;
+}
+
+.Profile-UploadModal{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}

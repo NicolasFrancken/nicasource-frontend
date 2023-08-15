@@ -1,4 +1,4 @@
-import "./EditModal.css";
+import "../styles/UploadModal.css";
 
 import { createPortal } from "react-dom";
 import { useState } from "react";
@@ -29,6 +29,7 @@ function UploadModal() {
 
     if (res.message) {
       setErrorMessage(res.message);
+      return;
     }
 
     setShowModal(!showModal);
@@ -36,20 +37,24 @@ function UploadModal() {
 
   const modal = createPortal(
     <>
-      <div className="EditModal-grey-container"></div>
-      <div className="EditModal-container">
-        <form className="EditModal-form" onSubmit={handleUploadSubmit}>
+      <div className="UploadModal-GreyContainer"></div>
+      <div className="UploadModal-Container">
+        <form className="UploadModal-Form" onSubmit={handleUploadSubmit}>
           <input
             placeholder="Title"
             onChange={handleTitleInputChange}
             value={titleValue}
+            className="UploadModal-Input"
           />
           <input
             placeholder="URL"
             onChange={handleUrlInputChange}
             value={urlValue}
+            className="UploadModal-Input"
           />
-          <button type="submit">Upload</button>
+          <button type="submit" className="UploadModal-SubmitButton">
+            Upload
+          </button>
         </form>
       </div>
     </>,
@@ -59,7 +64,7 @@ function UploadModal() {
   return showModal === true ? (
     modal
   ) : (
-    <button className="EditModal-btn" onClick={handleUploadClick}>
+    <button className="UploadModal-Button" onClick={handleUploadClick}>
       Upload Video
     </button>
   );

@@ -1,7 +1,6 @@
 import "../styles/Header.css";
 
 import { IoIosPerson } from "react-icons/io";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Header() {

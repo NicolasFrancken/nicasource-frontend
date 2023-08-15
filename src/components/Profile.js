@@ -1,17 +1,20 @@
+import "../styles/Profile.css";
+
 import Header from "./Header";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSignOut } from "react-auth-kit";
 
 import getCreatorVideos from "../libs/getCreatorVideos";
 import publishSwitch from "../libs/publishSwitch";
-import deleteVideo from "../libs/deleteVideo";
 import UploadModal from "./UploadModal";
 
 function Profile() {
   const [creatorVideos, setCreatorVideos] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const signOut = useSignOut();
   const navigate = useNavigate();
 
   const fetch = async () => {
@@ -34,19 +37,15 @@ function Profile() {
 
     if (res.message) {
       setErrorMessage(res.message);
+      return;
     }
 
     fetch();
   };
 
-  const handleDeleteClick = async (id) => {
-    const res = await deleteVideo(id);
-
-    if (res.message) {
-      setErrorMessage(res.message);
-    }
-
-    fetch();
+  const handleSignoutClick = () => {
+    signOut();
+    navigate("/signin");
   };
 
   let renderedVideos;
@@ -59,16 +58,16 @@ function Profile() {
   } else {
     renderedVideos = creatorVideos.map((v) => {
       return (
-        <div key={v.id_video}>
-          <button onClick={() => handleDeleteClick(v.id_video)}>Delete</button>
+        <div key={v.id_video} className="Profile-VideoContainer">
           <iframe
-            width="560"
-            height="315"
+            width="300"
+            height="169"
             src={v.url}
             title="YouTube video player"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
+            allowFullScreen
+            className="Profile-FrameContainer"
           ></iframe>
           <h3>{v.title}</h3>
           <p>{v.date}</p>
@@ -86,9 +85,21 @@ function Profile() {
   return (
     <>
       <Header />
-      <h2>My Videos</h2>
-      {errorMessage ? <div>{errorMessage}</div> : renderedVideos}
-      <UploadModal />
+      <div className="Profile-Container">
+        <div className="Profile-Top">
+          <h2 className="Profile-Title">My Videos</h2>
+          <button
+            onClick={handleSignoutClick}
+            className="Profile-SignoutButton"
+          >
+            Sign out
+          </button>
+        </div>
+        <div className="Profile-Bottom">
+          {errorMessage ? <div>{errorMessage}</div> : renderedVideos}
+          <UploadModal />
+        </div>
+      </div>
     </>
   );
 }

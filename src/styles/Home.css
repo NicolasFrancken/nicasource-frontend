@@ -1,0 +1,52 @@
+.Home-Container {
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  padding: 7rem 1rem 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.Home-Title {
+  margin: 0;
+  align-self: center;
+  justify-self: center;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.Home-SubContainer {
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.Home-VideoContainer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 300px;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem
+}
+
+.Home-FrameContainer{
+  border-radius: 1rem;
+}
+
+.Home-VideoTitle {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.Home-VideoDate{
+  font-size: 0.8rem;
+}
+
+.Home-Error{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

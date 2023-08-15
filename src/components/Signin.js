@@ -4,12 +4,14 @@ import axios from "axios";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSignIn } from "react-auth-kit";
 
 function Signin() {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const signIn = useSignIn();
   const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
@@ -23,7 +25,7 @@ function Signin() {
     event.preventDefault();
 
     try {
-      await axios.post(
+      const res = await axios.post(
         "http://localhost:5000/api/creators/signin",
         {
           email: emailValue,
@@ -35,45 +37,52 @@ function Signin() {
         }
       );
 
+      signIn({
+        token: res.data.token,
+        expiresIn: 3600,
+        tokenType: "Bearer",
+        authState: { email: emailValue },
+      });
+
       navigate(`/videos`);
     } catch (e) {
       setErrorMessage(e.response.data.message);
     }
   };
   return (
-    <div className="Home-container">
+    <div className="Sign-container">
       <form
         onSubmit={handleLoginSubmit}
         autoComplete="off"
-        className="Home-Form"
+        className="Sign-Form"
       >
         <input
           value={emailValue}
           onChange={handleEmailChange}
           placeholder="Email"
-          className="Home-Input"
+          className="Sign-Input"
         />
         <input
           value={passwordValue}
           type="password"
           onChange={handlePasswordChange}
           placeholder="Password"
-          className="Home-Input"
+          className="Sign-Input"
         />
         {errorMessage !== "" ? (
-          <label className="Home-Label">{errorMessage}</label>
+          <label className="Sign-Label">{errorMessage}</label>
         ) : (
           ""
         )}
-        <button type="submit" className="Home-SubmitButton">
-          Log in
+        <button type="submit" className="Sign-SubmitButton">
+          Sign in
         </button>
       </form>
       <button
         onClick={() => {
           navigate("/signup");
         }}
-        className="Home-Button"
+        className="Sign-Button"
       >
         Don't have an account? Sign up
       </button>

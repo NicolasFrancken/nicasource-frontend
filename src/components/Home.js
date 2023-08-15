@@ -1,3 +1,5 @@
+import "../styles/Home.css";
+
 import Header from "./Header";
 import getVideos from "../libs/getVideos";
 
@@ -13,6 +15,7 @@ function Home() {
 
       if (res.message) {
         setErrorMessage(res.message);
+        return;
       }
 
       setVideos(res.videos);
@@ -31,18 +34,21 @@ function Home() {
   } else {
     renderedVideos = videos.map((v) => {
       return (
-        <div key={v.id_video}>
+        <div key={v.id_video} className="Home-VideoContainer">
           <iframe
-            width="560"
-            height="315"
+            width="300"
+            height="169"
             src={v.url}
             title="YouTube video player"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
+            allowFullScreen
+            className="Home-FrameContainer"
           ></iframe>
-          <h2>{v.title}</h2>
-          <label>{v.date}</label>
+          <h2 className="Home-VideoTitle">{v.title}</h2>
+          <label className="Home-VideoDate">
+            Date Uploaded: {v.date.slice(0, 10)}
+          </label>
         </div>
       );
     });
@@ -51,7 +57,16 @@ function Home() {
   return (
     <>
       <Header />
-      <div>{errorMessage ? <div>{errorMessage}</div> : renderedVideos}</div>
+      <div className="Home-Container">
+        <h2 className="Home-Title">All published videos</h2>
+        {errorMessage ? (
+          <div className="Home-Error">
+            <p>{errorMessage}</p>
+          </div>
+        ) : (
+          <div className="Home-SubContainer">{renderedVideos}</div>
+        )}
+      </div>
     </>
   );
 }

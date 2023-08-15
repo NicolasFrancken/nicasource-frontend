@@ -8,7 +8,7 @@ function Error() {
       <h2>PAGE NOT FOUND</h2>
       <button
         onClick={() => {
-          navigate("/signup");
+          navigate("/signin");
         }}
       >
         Go back
