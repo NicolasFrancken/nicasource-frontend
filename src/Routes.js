@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Signup from "./components/Signup";
 import Signin from "./components/Signin";
 import Home from "./components/Home";
+import Creators from "./components/Creators";
 import Video from "./components/Video";
 import Profile from "./components/Profile";
 import Error from "./components/Error";
@@ -18,6 +19,14 @@ function AppRoutes() {
         element={
           <RequireAuth loginPath="/signin">
             <Home />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/creators"
+        element={
+          <RequireAuth loginPath="/signin">
+            <Creators />
           </RequireAuth>
         }
       />

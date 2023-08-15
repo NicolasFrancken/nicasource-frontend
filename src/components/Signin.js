@@ -1,10 +1,10 @@
 import "../styles/Sign.css";
 
-import axios from "axios";
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSignIn } from "react-auth-kit";
+
+import signin from "../libs/signin";
 
 function Signin() {
   const [emailValue, setEmailValue] = useState("");
@@ -21,71 +21,67 @@ function Signin() {
   const handlePasswordChange = (event) => {
     setPasswordValue(event.target.value);
   };
-  const handleLoginSubmit = async (event) => {
+
+  const handleSigninSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      const res = await axios.post(
-        "http://localhost:5000/api/creators/signin",
-        {
-          email: emailValue,
-          password: passwordValue,
-        },
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
+    const res = await signin(emailValue, passwordValue);
 
-      signIn({
-        token: res.data.token,
-        expiresIn: 3600,
-        tokenType: "Bearer",
-        authState: { email: emailValue },
-      });
-
-      navigate(`/videos`);
-    } catch (e) {
-      setErrorMessage(e.response.data.message);
+    if (res.message) {
+      setErrorMessage(res.message);
+      return;
     }
+
+    signIn({
+      token: res.user.token,
+      expiresIn: 3600,
+      tokenType: "Bearer",
+      authState: {
+        creatorId: res.user.result.id_creator,
+      },
+    });
+
+    navigate(`/videos`);
   };
   return (
-    <div className="Sign-container">
-      <form
-        onSubmit={handleLoginSubmit}
-        autoComplete="off"
-        className="Sign-Form"
-      >
-        <input
-          value={emailValue}
-          onChange={handleEmailChange}
-          placeholder="Email"
-          className="Sign-Input"
-        />
-        <input
-          value={passwordValue}
-          type="password"
-          onChange={handlePasswordChange}
-          placeholder="Password"
-          className="Sign-Input"
-        />
-        {errorMessage !== "" ? (
-          <label className="Sign-Label">{errorMessage}</label>
-        ) : (
-          ""
-        )}
-        <button type="submit" className="Sign-SubmitButton">
-          Sign in
+    <div className="Sign-UpperContainer">
+      <div className="Sign-container">
+        <form
+          onSubmit={handleSigninSubmit}
+          autoComplete="off"
+          className="Sign-Form"
+        >
+          <input
+            value={emailValue}
+            onChange={handleEmailChange}
+            placeholder="Email"
+            className="Sign-Input"
+          />
+          <input
+            value={passwordValue}
+            type="password"
+            onChange={handlePasswordChange}
+            placeholder="Password"
+            className="Sign-Input"
+          />
+          {errorMessage !== "" ? (
+            <label className="Sign-Label">{errorMessage}</label>
+          ) : (
+            ""
+          )}
+          <button type="submit" className="Sign-SubmitButton">
+            Sign in
+          </button>
+        </form>
+        <button
+          onClick={() => {
+            navigate("/signup");
+          }}
+          className="Sign-Button"
+        >
+          Don't have an account? Sign up
         </button>
-      </form>
-      <button
-        onClick={() => {
-          navigate("/signup");
-        }}
-        className="Sign-Button"
-      >
-        Don't have an account? Sign up
-      </button>
+      </div>
     </div>
   );
 }

@@ -1,14 +1,14 @@
 import "../styles/Profile.css";
 
-import Header from "./Header";
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSignOut } from "react-auth-kit";
+import { useSignOut, useAuthUser } from "react-auth-kit";
 
 import getCreatorVideos from "../libs/getCreatorVideos";
 import publishSwitch from "../libs/publishSwitch";
+
 import UploadModal from "./UploadModal";
+import Header from "./Header";
 
 function Profile() {
   const [creatorVideos, setCreatorVideos] = useState([]);
@@ -16,9 +16,10 @@ function Profile() {
 
   const signOut = useSignOut();
   const navigate = useNavigate();
+  const auth = useAuthUser();
 
   const fetch = async () => {
-    const res = await getCreatorVideos();
+    const res = await getCreatorVideos(auth().creatorId);
 
     if (res.message) {
       setErrorMessage(res.message);
@@ -51,7 +52,7 @@ function Profile() {
   let renderedVideos;
   if (creatorVideos.length === 0) {
     renderedVideos = (
-      <div>
+      <div className="Profile-NoVideosContainer">
         <p>No videos uploaded yet...</p>
       </div>
     );
@@ -69,14 +70,24 @@ function Profile() {
             allowFullScreen
             className="Profile-FrameContainer"
           ></iframe>
-          <h3>{v.title}</h3>
-          <p>{v.date}</p>
-          <button onClick={() => handlePublishClick(v.id_video)}>
-            {v.published === true ? "Unpublish" : "Publish"}
-          </button>
-          <button onClick={() => navigate(`/videos/${v.id_video}`)}>
-            Details
-          </button>
+          <h3 className="Profile-VideoTitle">{v.title}</h3>
+          <label className="Profile-VideoDate">
+            Date Uploaded: {v.date.slice(0, 10)}
+          </label>
+          <div className="Profile-VideoButtonsContainer">
+            <button
+              onClick={() => handlePublishClick(v.id_video)}
+              className="Profile-VideoButton"
+            >
+              {v.published === true ? "Unpublish" : "Publish"}
+            </button>
+            <button
+              onClick={() => navigate(`/videos/${v.id_video}`)}
+              className="Profile-VideoButton"
+            >
+              Details
+            </button>
+          </div>
         </div>
       );
     });
@@ -96,8 +107,12 @@ function Profile() {
           </button>
         </div>
         <div className="Profile-Bottom">
-          {errorMessage ? <div>{errorMessage}</div> : renderedVideos}
-          <UploadModal />
+          {errorMessage ? (
+            <div className="Profile-Error">{errorMessage}</div>
+          ) : (
+            renderedVideos
+          )}
+          <UploadModal fetch={fetch} />
         </div>
       </div>
     </>

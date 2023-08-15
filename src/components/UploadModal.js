@@ -2,19 +2,25 @@ import "../styles/UploadModal.css";
 
 import { createPortal } from "react-dom";
 import { useState } from "react";
+import { useAuthUser } from "react-auth-kit";
+
 import uploadVideo from "../libs/uploadVideo";
 
-function UploadModal() {
+function UploadModal({ fetch }) {
   const [showModal, setShowModal] = useState(false);
   const [titleValue, setTitleValue] = useState("");
   const [urlValue, setUrlValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const auth = useAuthUser();
+
   const handleTitleInputChange = (event) => {
+    setErrorMessage("");
     setTitleValue(event.target.value);
   };
 
   const handleUrlInputChange = (event) => {
+    setErrorMessage("");
     setUrlValue(event.target.value);
   };
 
@@ -22,10 +28,22 @@ function UploadModal() {
     setShowModal(!showModal);
   };
 
+  const handleErrorClick = () => {
+    setShowModal(false);
+    setErrorMessage("");
+    setTitleValue("");
+    setUrlValue("");
+  };
+
   const handleUploadSubmit = async (event) => {
     event.preventDefault();
 
-    const res = await uploadVideo(1, urlValue, titleValue);
+    if (titleValue === "" || urlValue === "") {
+      setErrorMessage("Fields should not be empty");
+      return;
+    }
+
+    const res = await uploadVideo(auth().creatorId, urlValue, titleValue);
 
     if (res.message) {
       setErrorMessage(res.message);
@@ -33,12 +51,16 @@ function UploadModal() {
     }
 
     setShowModal(!showModal);
+    fetch();
   };
 
   const modal = createPortal(
     <>
       <div className="UploadModal-GreyContainer"></div>
       <div className="UploadModal-Container">
+        <button onClick={handleErrorClick} className="UploadModal-CancelButton">
+          X
+        </button>
         <form className="UploadModal-Form" onSubmit={handleUploadSubmit}>
           <input
             placeholder="Title"
@@ -52,6 +74,13 @@ function UploadModal() {
             value={urlValue}
             className="UploadModal-Input"
           />
+          {errorMessage ? (
+            <div className="UploadModal-ErrorContainer">
+              <label className="UploadModal-ErrorLabel">{errorMessage}</label>
+            </div>
+          ) : (
+            ""
+          )}
           <button type="submit" className="UploadModal-SubmitButton">
             Upload
           </button>

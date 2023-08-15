@@ -1,10 +1,16 @@
+.Sign-UpperContainer{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .Sign-container {
   display: flex;
   flex-direction: column;
-  align-self: center;
-  justify-self: center;
   background-color: #292929;
-  width: 17vw;
+  width: 17rem;
   height: fit-content;
   padding: 3rem;
   border-radius: 1rem;
