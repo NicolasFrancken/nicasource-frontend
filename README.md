@@ -8,6 +8,10 @@ Keep in mind that if you want to upload a video, you'll have to go to YouTube, s
 
 Hope you like it!!
 
+If you have any questions, or something does not work as expected, call me: +542944959344 or write me an email: franckennicolas@gmail.com
+
+At the moment of publishing it, everything works great!
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
