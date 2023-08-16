@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 
-import Signup from "./components/Signup";
-import Signin from "./components/Signin";
-import Home from "./components/Home";
-import Creators from "./components/Creators";
-import Video from "./components/Video";
-import Profile from "./components/Profile";
-import Error from "./components/Error";
+import Signup from "./pages/Signup";
+import Signin from "./pages/Signin";
+import Home from "./pages/Home";
+import Creators from "./pages/Creators";
+import Video from "./pages/Video";
+import Profile from "./pages/Profile";
+import Error from "./pages/Error";
 import { RequireAuth } from "react-auth-kit";
 
 function AppRoutes() {

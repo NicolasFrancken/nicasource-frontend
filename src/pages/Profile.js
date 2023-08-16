@@ -7,8 +7,8 @@ import { useSignOut, useAuthUser } from "react-auth-kit";
 import getCreatorVideos from "../libs/getCreatorVideos";
 import publishSwitch from "../libs/publishSwitch";
 
-import UploadModal from "./UploadModal";
-import Header from "./Header";
+import UploadModal from "../components/UploadModal";
+import Header from "../components/Header";
 
 function Profile() {
   const [creatorVideos, setCreatorVideos] = useState([]);

@@ -7,7 +7,7 @@ import { useAuthUser } from "react-auth-kit";
 import switchLike from "../libs/switchLike";
 import getCreator from "../libs/getCreator";
 
-import Header from "./Header";
+import Header from "../components/Header";
 import getVideos from "../libs/getVideos";
 
 function Home() {

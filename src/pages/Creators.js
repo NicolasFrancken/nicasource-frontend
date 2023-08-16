@@ -7,7 +7,7 @@ import switchFollow from "../libs/switchFollow";
 import getCreator from "../libs/getCreator";
 import getCreators from "../libs/getCreators";
 
-import Header from "./Header";
+import Header from "../components/Header";
 
 function Creators() {
   const [creators, setCreators] = useState([]);
@@ -91,7 +91,7 @@ function Creators() {
       <Header />
       <div className="Creators-Container">
         {errorMessage ? (
-          <div className="Creators-Error">errorMessage</div>
+          <div className="Creators-Error">{errorMessage}</div>
         ) : (
           renderedCreators
         )}

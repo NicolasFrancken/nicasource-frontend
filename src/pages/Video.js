@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import getVideo from "../libs/getVideo";
 import updateVideo from "../libs/updateVideo";
-import Header from "./Header";
+import Header from "../components/Header";
 import deleteVideo from "../libs/deleteVideo";
 
 function Video() {
