@@ -1,10 +1,12 @@
-Hi nicasource, here is my proyect!
-To start your frontend you'll have to download it and use "npm install".
+Hi NicaSource, here is my proyect!
+To start the frontend you'll have to download it and run "npm install".
 Then, you'll have to run the server and then run "npm start".
 
 After it starts, you will be able to create a user, upload videos, etc.
 
-Keep in mind that if you want to upload a video, you'll have to go to YouTube, selec a video and click "SHARE", then "EMBED" and then copy only the URL.
+Keep in mind that if you want to upload a video, you'll have to go to YouTube, select a video and click "SHARE", then "EMBED" and then copy only the URL.
+
+Hope you like it!!
 
 # Getting Started with Create React App
 
